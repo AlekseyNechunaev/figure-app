@@ -25,7 +25,7 @@ public final class FigureInfo {
         Figure figure = inputDataParser.getFigure();
         Printer printer = getPrinter(commandLineParametersInfo);
         assert printer != null;
-        final String printFigureInfo = figure.toString();
+        final String printFigureInfo = figure.getInfo();
         LOGGER.info(printFigureInfo);
         printer.print(printFigureInfo);
     }

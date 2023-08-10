@@ -20,8 +20,7 @@ public abstract class Figure {
 
     public abstract double getPerimeter();
 
-    @Override
-    public String toString() {
+    public String getInfo() {
         final StringJoiner figureInfo = new StringJoiner("\n");
         figureInfo.add(FigureParameterNames.FIGURE_TYPE + ": " + getName());
         figureInfo.add(FigureParameterNames.AREA + ": " + getArea() + " " + UNITS_OF_MEASUREMENT);

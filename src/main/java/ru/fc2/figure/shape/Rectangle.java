@@ -28,11 +28,11 @@ public class Rectangle extends Figure {
     }
 
     public double getLength() {
-        return Math.max(length, width);
+        return length;
     }
 
     public double getWidth() {
-        return Math.min(length, width);
+        return width;
     }
 
     @Override

@@ -38,7 +38,7 @@ public class Rectangle extends Figure {
     @Override
     public String getInfo() {
         final String generalFigureInfo = super.getInfo();
-        final StringJoiner joiner = new StringJoiner("\n");
+        final StringJoiner joiner = new StringJoiner(LINE_SEPARATOR);
         joiner.add(generalFigureInfo);
         joiner.add(FigureParameterNames.DIAGONAL_LENGTH + ": " + getDiagonalLength() + " " + UNITS_OF_MEASUREMENT);
         joiner.add(FigureParameterNames.LENGTH + ": " + getLength() + " " + UNITS_OF_MEASUREMENT);

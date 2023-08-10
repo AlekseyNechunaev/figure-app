@@ -28,7 +28,7 @@ public class Circle extends Figure {
     @Override
     public String getInfo() {
         final String generalFigureInfo = super.getInfo();
-        final StringJoiner joiner = new StringJoiner("\n");
+        final StringJoiner joiner = new StringJoiner(LINE_SEPARATOR);
         joiner.add(generalFigureInfo);
         joiner.add(FigureParameterNames.DIAMETER + ": " + getDiameter() + " " + UNITS_OF_MEASUREMENT);
         joiner.add(FigureParameterNames.RADIUS + ": " + radius + " " + UNITS_OF_MEASUREMENT);

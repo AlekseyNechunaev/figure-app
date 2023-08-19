@@ -5,10 +5,8 @@ import org.slf4j.LoggerFactory;
 import ru.fc2.figure.exception.InputDataValidationException;
 import ru.fc2.figure.shape.*;
 import ru.fc2.figure.utils.StringUtils;
-import ru.fc2.figure.utils.validation.CircleValidator;
 import ru.fc2.figure.utils.validation.FigureValidator;
-import ru.fc2.figure.utils.validation.RectangleValidator;
-import ru.fc2.figure.utils.validation.TriangleValidator;
+import ru.fc2.figure.utils.validation.ValidatorFactory;
 
 import java.util.Arrays;
 
@@ -21,7 +19,7 @@ public class FigureInputDataParser {
     private final Double[] parameters;
 
     public FigureInputDataParser(String inputDataFromFile) {
-        validateInputData(inputDataFromFile);
+        checkInputData(inputDataFromFile);
         this.inputDataArray = parseInputDataToArray(inputDataFromFile);
         this.figureType = parseFigureType();
         this.parameters = parseParameters();
@@ -29,8 +27,7 @@ public class FigureInputDataParser {
     }
 
     public Figure getFigure() {
-        FigureValidator validator = getValidatorByFigureType(figureType);
-        assert validator != null;
+        FigureValidator validator = ValidatorFactory.getValidator(figureType);
         if (validator.isValidParameters(parameters)) {
             switch (figureType) {
                 case TRIANGLE:
@@ -38,8 +35,8 @@ public class FigureInputDataParser {
                 case CIRCLE:
                     return new Circle(parameters[0]);
                 case RECTANGLE:
-                    double width = Math.max(parameters[0], parameters[1]);
-                    double length = Math.min(parameters[1], parameters[0]);
+                    double width = Math.min(parameters[0], parameters[1]);
+                    double length = Math.max(parameters[1], parameters[0]);
                     return new Rectangle(length, width);
             }
         }
@@ -48,7 +45,7 @@ public class FigureInputDataParser {
     }
 
     private String[] parseInputDataToArray(String inputData) {
-        String[] array = inputData.trim().split("\n");
+        String[] array = inputData.trim().split(System.lineSeparator());
         if (array.length == MAX_ROWS_ON_INPUT_ARRAY) {
             return array;
         }
@@ -80,21 +77,7 @@ public class FigureInputDataParser {
         return parsedParams;
     }
 
-
-    private FigureValidator getValidatorByFigureType(FigureType figureType) {
-        switch (figureType) {
-            case RECTANGLE:
-                return new RectangleValidator();
-            case CIRCLE:
-                return new CircleValidator();
-            case TRIANGLE:
-                return new TriangleValidator();
-            default:
-                return null;
-        }
-    }
-
-    private void validateInputData(String inputData) {
+    private void checkInputData(String inputData) {
         if (StringUtils.checkNotEmpty(inputData)) {
             return;
         }

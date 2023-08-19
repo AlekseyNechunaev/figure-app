@@ -7,6 +7,7 @@ import ru.fc2.figure.shape.Circle;
 
 public class InputDataParserTest {
 
+    private static final String LINE_SEPARATOR = System.lineSeparator();
     @Test
     void inputContentIsEmptyErrorTest() {
         Assertions.assertThatThrownBy(() -> new FigureInputDataParser(" "))
@@ -17,9 +18,9 @@ public class InputDataParserTest {
     void inputUnknownFigureTypeErrorTest() {
         final StringBuilder inputData = new StringBuilder(50);
         inputData.append("CIRCLE")
-                .append("\n")
+                .append(LINE_SEPARATOR)
                 .append("5")
-                .append("\n")
+                .append(LINE_SEPARATOR)
                 .append("UNKNOWN TEXT");
         Assertions.assertThatThrownBy(() -> new FigureInputDataParser(inputData.toString()))
                 .isInstanceOf(InputDataValidationException.class);
@@ -29,7 +30,7 @@ public class InputDataParserTest {
     void inputUnknownFigureTypeTest() {
         final StringBuilder inputData = new StringBuilder(50);
         inputData.append("UNKNOWN")
-                .append("\n")
+                .append(LINE_SEPARATOR)
                 .append("5");
         Assertions.assertThatThrownBy(() -> new FigureInputDataParser(inputData.toString()))
                 .isInstanceOf(IllegalArgumentException.class);
@@ -39,7 +40,7 @@ public class InputDataParserTest {
     void inputIncorrectTypeParametersTest() {
         final StringBuilder inputData = new StringBuilder(50);
         inputData.append("CIRCLE")
-                .append("\n")
+                .append(LINE_SEPARATOR)
                 .append("TEXT");
         Assertions.assertThatThrownBy(() -> new FigureInputDataParser(inputData.toString()))
                 .isInstanceOf(NumberFormatException.class);
@@ -49,7 +50,7 @@ public class InputDataParserTest {
     void successFigureParseTest() {
         final StringBuilder inputData = new StringBuilder(50);
         inputData.append("CIRCLE")
-                .append("\n")
+                .append(LINE_SEPARATOR)
                 .append("5");
         FigureInputDataParser figureInputDataParser = new FigureInputDataParser(inputData.toString());
         Assertions.assertThat(figureInputDataParser.getFigure()).isInstanceOf(Circle.class);

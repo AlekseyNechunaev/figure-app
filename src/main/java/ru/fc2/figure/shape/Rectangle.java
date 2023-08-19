@@ -41,8 +41,8 @@ public class Rectangle extends Figure {
         final StringJoiner joiner = new StringJoiner(LINE_SEPARATOR);
         joiner.add(generalFigureInfo);
         joiner.add(FigureParameterNames.DIAGONAL_LENGTH + ": " + getDiagonalLength() + " " + UNITS_OF_MEASUREMENT);
-        joiner.add(FigureParameterNames.LENGTH + ": " + getLength() + " " + UNITS_OF_MEASUREMENT);
-        joiner.add(FigureParameterNames.WIDTH + ": " + getWidth() + " " + UNITS_OF_MEASUREMENT);
+        joiner.add(FigureParameterNames.LENGTH + ": " + length + " " + UNITS_OF_MEASUREMENT);
+        joiner.add(FigureParameterNames.WIDTH + ": " + width + " " + UNITS_OF_MEASUREMENT);
         return joiner.toString();
     }
 }
